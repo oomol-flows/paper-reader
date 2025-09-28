@@ -1,0 +1,130 @@
+nodes:
+  - node_id: analyse_pdf#1
+    title: "Analyse PDF #1"
+    inputs_from:
+      - handle: pdf
+        from_flow:
+          - input_handle: pdf
+        from_node:
+          []
+      - handle: device
+        value: cloud
+      - handle: ocr_level
+        value: once
+      - handle: correction
+        value: once
+      - handle: extract_formula
+        value: false
+      - handle: extract_table
+        value: false
+      - handle: window_tokens
+        value:
+      - handle: threads_count
+        value: 5
+      - handle: retry_times
+        value: 5
+      - handle: retry_interval_seconds
+        value: 1.5
+      - handle: output_dir
+        value:
+      - handle: llm
+        value:
+          model: deepseek-v3-250324
+          temperature: 1
+          top_p: 0.8
+          max_tokens: 4096
+    task: pdf-craft::analyse_pdf
+  - node_id: generate_epub#1
+    title: "Generate EPUB #1"
+    inputs_from:
+      - handle: analysed_dir
+        from_node:
+          - node_id: analyse_pdf#1
+            output_handle: output_dir
+      - handle: epub_file_path
+        value:
+      - handle: latex
+        value: true
+      - handle: table
+        value: true
+    task: pdf-craft::generate_epub
+  - node_id: translator#1
+    title: "Translate a book #1"
+    inputs_from:
+      - handle: model
+        value:
+          model: oomol-chat
+          temperature: 0
+          top_p: 0.5
+          max_tokens: 4096
+      - handle: source_file
+        from_node:
+          - node_id: generate_epub#1
+            output_handle: epub_file_path
+      - handle: translated_file
+        value: null
+        from_flow:
+          - input_handle: translated_file
+        from_node:
+          []
+      - handle: language
+        value: zh-Hans
+      - handle: prompt
+        value: null
+      - handle: max_chunk_tokens
+        value: 3000
+      - handle: threads
+        value: 3
+      - handle: retry_times
+        value: 5
+      - handle: retry_interval_seconds
+        value: 6.5
+      - handle: write_mode
+        value: append
+    task: books-translator::translator
+inputs_def:
+  - handle: pdf
+    json_schema:
+      type: string
+      ui:widget: file
+      ui:options:
+        filters:
+          - name: PDF
+            extensions:
+              - pdf
+    nullable: false
+    description: Scanned PDF file to be analysed
+    executor_name: python
+  - handle: translated_file
+    json_schema:
+      type: string
+      ui:widget: save
+      ui:options:
+        excludeAll: true
+        filters:
+          - name: EPUE
+            extensions:
+              - .epub
+    nullable: true
+    description: The saved path of the translated EPUB file. If not filled in,
+      specify an path.
+    value:
+    executor_name: python
+outputs_def:
+  - handle: translated_file
+    json_schema:
+      type: string
+      ui:widget: save
+      ui:options:
+        filters:
+          - name: EPUB
+            extensions:
+              - .epub
+    nullable: false
+    description: Translated EPUB file path.
+    executor_name: python
+outputs_from:
+  - handle: translated_file
+    from_node:
+      - node_id: translator#1
+        output_handle: translated_file

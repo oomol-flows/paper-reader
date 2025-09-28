@@ -1,0 +1,49 @@
+{
+  "nodes": {
+    "analyse_pdf#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 481,
+          "y": 0
+        }
+      }
+    },
+    "generate_epub#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 897,
+          "y": 146
+        }
+      }
+    },
+    "translator#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1442.5119109557675,
+          "y": 146
+        }
+      }
+    }
+  },
+  "pseudoNodes": {
+    "input": {
+      "rfNode": {
+        "position": {
+          "x": 0,
+          "y": -100
+        }
+      }
+    },
+    "output": {
+      "rfNode": {
+        "position": {
+          "x": 1000,
+          "y": -100
+        }
+      }
+    }
+  }
+}

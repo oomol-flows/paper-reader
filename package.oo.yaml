@@ -1,0 +1,9 @@
+version: 0.0.1
+icon: https://package-assets.oomol.com/packages/paper-reader/0.0.4/files/package/icon.png
+scripts:
+  bootstrap: |
+    npm install
+    poetry install --no-root
+dependencies:
+  pdf-craft: 0.2.15
+  books-translator: 0.1.15
