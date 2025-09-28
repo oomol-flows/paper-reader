@@ -29,10 +29,10 @@ nodes:
         value:
       - handle: llm
         value:
-          model: deepseek-v3-250324
-          temperature: 1
-          top_p: 0.8
-          max_tokens: 4096
+          model: deepseek-chat
+          temperature: 0.5
+          top_p: 1
+          max_tokens: 128000
     task: pdf-craft::analyse_pdf
   - node_id: generate_epub#1
     title: "Generate EPUB #1"
