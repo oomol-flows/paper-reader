@@ -1,4 +1,4 @@
-version: 0.0.5
+version: 0.0.6
 icon: https://package-assets.oomol.com/packages/paper-reader/0.0.4/files/package/icon.png
 scripts:
   bootstrap: |
@@ -9,6 +9,6 @@ dependencies:
   books-translator: 0.1.15
 name: paper-reader
 repository: https://github.com/oomol-flows/paper-reader
-releaseNotes: init
 displayName: "%key1%"
 description: "%key2%"
+releaseNotes: update
