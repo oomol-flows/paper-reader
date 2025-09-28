@@ -93,7 +93,7 @@ inputs_def:
             extensions:
               - pdf
     nullable: false
-    description: Scanned PDF file to be analysed
+    description: "PDF file to be analyzed and translated"
     executor_name: python
   - handle: translated_file
     json_schema:
@@ -106,8 +106,8 @@ inputs_def:
             extensions:
               - .epub
     nullable: true
-    description: The saved path of the translated EPUB file. If not filled in,
-      specify an path.
+    description: "Output path for the translated EPUB file. If not specified, a
+      default path will be used."
     value:
     executor_name: python
 outputs_def:
@@ -121,11 +121,14 @@ outputs_def:
             extensions:
               - .epub
     nullable: false
-    description: Translated EPUB file path.
+    description: "Path to the generated translated EPUB file."
     executor_name: python
 outputs_from:
   - handle: translated_file
     from_node:
       - node_id: translator#1
         output_handle: translated_file
-title: PDF Translater
+title: "PDF Translator"
+description: "A comprehensive subflow that analyzes PDF documents, converts them
+  to EPUB format, and translates the content to the specified language."
+icon: ":carbon:translate:"
