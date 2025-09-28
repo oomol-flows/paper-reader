@@ -1,4 +1,4 @@
-version: 0.0.6
+version: 0.0.7
 icon: https://package-assets.oomol.com/packages/paper-reader/0.0.4/files/package/icon.png
 scripts:
   bootstrap: |
