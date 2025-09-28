@@ -128,3 +128,4 @@ outputs_from:
     from_node:
       - node_id: translator#1
         output_handle: translated_file
+title: PDF Translater

@@ -1,0 +1,8 @@
+nodes:
+  - node_id: pdf_translater#1
+    title: "PDF Translater #1"
+    inputs_from:
+      - handle: pdf
+      - handle: translated_file
+        value: null
+    subflow: self::pdf_translater
